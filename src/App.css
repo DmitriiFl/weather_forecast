@@ -1,0 +1,45 @@
+.container {
+  width: 80%;
+  margin: 0 auto;
+  text-align: center;
+}
+.search {
+  margin-top: 30px;
+}
+form {
+  margin-bottom: 30px;
+}
+input {
+  border: 1px solid #aaaaaa;
+  border-radius: 3px;
+  padding: 5px 10px;
+  margin-right: 15px;
+  outline: none;
+}
+input:focus {
+  box-shadow: 3px 3px 5px rgba(0,0,0,0.5);
+}
+button {
+  border: 1px solid #aaaaaa;
+  outline: none;
+  border-radius: 3px;
+  padding: 5px 10px;
+}
+button:active {
+  background-color: rgb(199, 199, 199);
+}
+button:active, button:hover {
+  box-shadow: 3px 3px 5px rgba(0,0,0,0.5);
+}
+.error {
+  border: 1px solid #cc1212;
+  border-radius: 3px;
+  background-color: #f77777;
+  color: #cc1212;
+  padding: 15px;
+}
+@media (max-width: 660px) {
+  .container {
+    width: 100%;
+  }
+}
