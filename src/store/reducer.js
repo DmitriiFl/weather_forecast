@@ -1,4 +1,4 @@
-import { SET_CITY, SET_WEATHER, SET_ERROR, REMOVE_ERROR } from "./actions";
+import * as actionTypes from "./actions";
 
 const initialState = {
   city: "",
@@ -6,15 +6,15 @@ const initialState = {
   error: false,
 };
 
-export const rootReducer = (state = initialState, action) => {
+export const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case SET_CITY:
+    case actionTypes.SET_CITY:
       return { ...state, city: action.city };
-    case SET_WEATHER:
+    case actionTypes.SET_WEATHER:
       return { ...state, weather: action.weather };
-    case SET_ERROR:
+    case actionTypes.SET_ERROR:
       return { ...state, error: action.error };
-    case REMOVE_ERROR:
+    case actionTypes.REMOVE_ERROR:
       return { ...state, error: false };
     default:
       return state;

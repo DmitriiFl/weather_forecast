@@ -1,24 +1,29 @@
 import React from "react";
 import { getCityWeather } from "../services/openWeatherService";
-import { editCity, setWeather, setError, removeError } from "../redux/actions";
 import { connect } from "react-redux";
+import * as actionTypes from "../store/actions";
 
-const Search = ({ city, error, dispatch }) => {
-  const handleChange = (inputValue) => {
-    dispatch(editCity(inputValue));
-  };
+const Search = ({
+  city,
+  error,
+  onEditCity,
+  onSetWeather,
+  onRemoveError,
+  onSetError,
+}) => {
   const searchCity = (e) => {
     e.preventDefault();
     getCityWeather(city)
       .then((res) => {
-        dispatch(setWeather(res));
-        dispatch(removeError());
+        onSetWeather(res);
+        onRemoveError();
       })
       .catch((error) => {
-        dispatch(setError(error));
-        dispatch(setWeather([]));
+        onSetError(error);
+        onSetWeather([]);
       });
   };
+
   const errorText = (error) => {
     let result = `${error.name}. ${error.message}.`;
     if (error.response.status < 500) {
@@ -31,7 +36,7 @@ const Search = ({ city, error, dispatch }) => {
     <div className="search">
       <form>
         <input
-          onChange={(e) => handleChange(e.target.value)}
+          onChange={(e) => onEditCity(e.target.value)}
           type="text"
           name="city"
           placeholder="Enter city name"
@@ -51,4 +56,14 @@ const mapStateToProps = ({ city, error, weather }) => ({
   error,
   weather,
 });
-export default connect(mapStateToProps)(Search);
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onEditCity: (city) => dispatch({ type: actionTypes.SET_CITY, city }),
+    onSetWeather: (weather) =>
+      dispatch({ type: actionTypes.SET_WEATHER, weather }),
+    onSetError: (error) => dispatch({ type: actionTypes.SET_ERROR, error }),
+    onRemoveError: () => dispatch({ type: actionTypes.REMOVE_ERROR }),
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(Search);
