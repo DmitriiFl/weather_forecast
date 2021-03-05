@@ -1,13 +1,13 @@
 import React from "react";
 import "./App.css";
-import Search from "./components/Search";
 import Chart from "./components/Chart";
 import { connect } from "react-redux";
+import SearchControl from "./containers/SearchControl";
 
 function App({ weather }) {
   return (
     <div className="container">
-      <Search />
+      <SearchControl />
       {weather.length > 0 && <Chart />}
     </div>
   );
